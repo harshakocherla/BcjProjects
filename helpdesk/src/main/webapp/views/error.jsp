@@ -1,0 +1,283 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>BCJ-HelpDesk</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<c:url value="/resources/theme1/css/BCJhelpDesk.css"/>">
+<link rel="icon"
+	href="<c:url value="/resources/theme1/css/icon3.png" />" type="image">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	$(window).on("load", function() {
+		$("#login").modal("show");
+	});
+</script>
+<style type="text/css"></style>
+</head>
+
+<body class="bg4">
+	<div class="container-fluid row">
+		<div class="col-sm-4">
+
+			<img src="<c:url value="/resources/theme1/css/icon11.png" />"
+				alt="icon11.png" height="140px" />
+		</div>
+		<div class="col-sm-4">
+			<h1 align="center">Happy colleagues make</h1>
+			<h1 align="center">Happy customers</h1>
+		</div>
+	</div>
+	<nav class="navbar navbar-inverse" data-spy="affix"
+		data-offset-top="197"
+		style="background: linear-gradient(to top left, #0000ff 0%, #0099ff 100%)">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><b>BCJ-Helpdesk</b></a>
+
+			</div>
+			<!-- Menu Items -->
+
+			<ul class="nav navbar-nav">
+				<li data-toggle="tab" data-target="#myHome" class="active"><a
+					href="#" title="Home">Home</a></li>
+				<li data-toggle="tab" data-target="#myTickets"><a href="#">Tickets</a></li>
+				<li data-toggle="tab" data-target="#contact"><a href="#"><span
+						class="glyphicon glyphicon-phone-alt"></span>Contact</a></li>
+			</ul>
+			<!-- Sign Out -->
+			<ul class="nav navbar-nav navbar-right">
+				<li data-toggle="modal" data-target="#signup"><a href="#"><span
+						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li data-toggle="modal" data-target="#login"><a href="#"><span
+						class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+
+
+			<!-- Signup -->
+			<form action="signup" method="POST">
+				<div id="signup" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<!--Modal Content-->
+
+						<div class="modal-content">
+
+							<div id="signupheadercolor" class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title" style="align: center;">Sign up</h4>
+							</div>
+
+							<div class="modal-body">
+								<!-- style="background-color: rgb(230, 245, 255)" -->
+								<div class="bg1">
+									<p align="center">
+										<b><i>Personal Details</i></b>
+									</p>
+									<div class="form-group">
+										<label for="firstname">First Name:</label> <input type="text"
+											class="form-control" id="signupinputcolor"
+											placeholder="Enter firstname" name="firstName">
+									</div>
+									<div class="form-group">
+										<label for="lastname">last Name:</label> <input type="text"
+											class="form-control" id="signupinputcolor"
+											placeholder="Enter firstname" name="lastName">
+									</div>
+									<hr>
+									<p align="center">
+										<b><i>Address</i></b>
+									</p>
+									<div class="form-group">
+										<label for="addressline1">Address Line 1:</label> <input
+											type="text" class="form-control" id="signupinputcolor"
+											placeholder="Enter addressline1" name="address.addressLine1">
+									</div>
+									<div class="form-group">
+										<label for="addressline2">Address Line 2:</label> <input
+											id="signupinputcolor" type="text" class="form-control"
+											placeholder="Enter addressline2" name="address.addressLine2">
+									</div>
+									<div class="form-group">
+										<label for="city">City:</label> <input id="signupinputcolor"
+											type="text" class="form-control" placeholder="Enter city"
+											name="address.city">
+									</div>
+									<div class="form-group">
+										<label for="state" class="control-label">State:</label>
+										<div>
+											<select class="form-control" id="state signupinputcolor"
+												name="address.state"
+												style="background-color: rgb(230, 245, 255)">
+												<c:forEach var="item" items="${usStates}">
+													<option value="${item}">${item}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<!-- r-->
+									</div>
+									<div class="form-group">
+										<label for="zip">ZIP:</label> <input id="signupinputcolor"
+											type="text" class="form-control" placeholder="Enter ZIP"
+											name="address.zip">
+									</div>
+									<div class="form-group">
+										<label for="phone">Phone:</label> <input id="signupinputcolor"
+											type="text" class="form-control"
+											placeholder="Enter Phone Number" name="phone">
+									</div>
+									<hr>
+									<p align="center">
+										<b><i>User Details</i></b>
+									</p>
+									<div class="form-group">
+										<label for="email">Email:</label> <input type="email"
+											class="form-control" id="signupinputcolor"
+											placeholder="Enter email" name="email">
+									</div>
+									<div class="form-group">
+										<label for="username">User Name:</label> <input type="text"
+											class="form-control" id="signupinputcolor"
+											placeholder="Enter username" name="login.username">
+									</div>
+									<div class="form-group">
+										<label for="pwd">Password:</label> <input type="password"
+											class="form-control" id="signupinputcolor"
+											placeholder="Enter password" name="login.password">
+									</div>
+									<div class="form-group">
+										<label for="usertype">User Type:</label>
+										<div>
+											<select class="form-control" id="signupinputcolor"
+												name="userType">
+												<c:forEach var="item" items="${userType}">
+													<option value="${item}">${item}</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" id="signupcolor">
+								<button type="submit" class="btn btn-default"
+									style="background-color: rgb(51, 173, 255)">
+									<b>sign up</b>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<form action="login" method="POST">
+
+				<div id="login" class="modal fade" role="dialog">
+					<div class="modal-dialog" style="margin-top: 250px">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header" id="loginheadercolor">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Login</h4>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<label for="username">User Name:</label> <input type="username"
+										class="form-control" id="logininputcolor"
+										placeholder="Enter username" name="username">
+								</div>
+								<div class="form-group">
+									<label for="pwd">Password:</label> <input type="password"
+										class="form-control" id="logininputcolor"
+										placeholder="Enter password" name="password"
+										style="background-color: rgb(255, 255, 230)">
+								</div>
+							</div>
+							<div align="center">
+								<p>${message}</p>
+							</div>
+							<div class="modal-footer" id="logincolor">
+								<button type="submit" class="btn btn-default"
+									style="background-color: rgb(255, 255, 153)">
+									<b>login</b>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+
+		</div>
+	</nav>
+
+	<div class="tab-content">
+		<div id="myHome" class="container tab-pane fade in active"
+			align="center" style="color: #000000;">
+			<!-- style='background-image: url("icon1.jpg")'-->
+			<h2>
+				<b>BCJ Help Desk</b>
+			</h2>
+			<p>
+				<small>Learn about issues, file a complaint or check your
+					complaint status.</small>
+			</p>
+			<p>
+				<small>Please sign in</small>
+			</p>
+		</div>
+
+		<div id="myTickets" class="container tab-pane fade" align="center"
+			style="color: #000000;">
+			<!-- style='background-image: url("icon1.jpg")'-->
+			<h2>
+				<b>BCJ Help Desk</b>
+			</h2>
+			<p>
+				To view or manage tickets please signin
+			</p>
+
+		</div>
+		<div id="contact" class="container jumbotron tab-pane fade"
+			style="background: rgba(153, 235, 255, 0.5)">
+			<h3 align="center">Contact Details</h3><hr>
+			<p>
+			<pre>
+				Ektha Solution is very much responsive to queries and questions through email. 
+				Please send us your business inquiries through the contact form or send an email or mail on the address below. 
+				We are open to phone calls on business days during business hours.
+			</pre>
+			</p><hr>
+			<p>
+			<pre>
+			<b>
+			Office: USA
+			</b>
+			<b>
+			Address:</b>
+			3050 Regent BLVD, STE 150 Irving, TX 75063
+			<b>
+			Email:</b>
+			info@ekthasol.com
+			<b>
+			Phone:</b>
+			+1 214 550 0232
+			</pre>
+			</p>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

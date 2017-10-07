@@ -1,0 +1,84 @@
+.bg3 {
+	background-image: url("icon10.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 100%;
+	width: 100%;
+}
+
+.bg4 {
+	background-image: url("icon15.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 100%;
+	width: 100%;
+}
+
+#navcolor {
+	background: linear-gradient(to top left, #0000ff 0%, #0099ff 63%);
+}
+
+h1, h3, h4 {
+	color: black;
+	text-shadow: 3px 2px lightblue;
+	font-family: FreeMono, monospace;
+}
+
+h2{
+	color: gray;
+	text-shadow: 4px 2px white;
+	font-family: "Helvetic Neue", Helvetica, Arial, sans-serif;   
+}
+/*       .bg2 {
+            background-image: url("icon11.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            height: 140px;
+        } */
+ .transparence {
+	background: rgba(153, 51, 0, 0.5)
+} 
+.t{
+	background: rgba(153, 51, 0, 0.5)
+}
+
+
+.font {
+	font-weight: bold;
+	color: #000000;
+}
+.affix {
+	top: 0;
+	width: 100%;
+}
+
+.affix+.container-fluid {
+	padding-top: 70px;
+}
+#affixbg {
+	background: linear-gradient(to top, #999966 0%, #ffffff 100%);
+}
+
+#signupcolor {
+	background-color: rgb(230, 245, 255);
+}
+
+#signupinputcolor {
+	background-color: rgb(230, 245, 255);
+}
+#signupheadercolor{
+background: linear-gradient(to top left, #0000ff 0%, #0099ff 63%);
+}
+#loginheadercolor{
+	background: linear-gradient(to bottom left, #ffcc00 34%, #ffff00 91%);
+}
+
+#logincolor {
+	background-color: rgb(255, 255, 230);
+}
+
+#logininputcolor {
+	background-color: rgb(255, 255, 230);
+}

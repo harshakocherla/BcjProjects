@@ -1,0 +1,16 @@
+com\bcj\helpdesk\dao\ticketsmanagement\TicketsManagementDao.class
+com\bcj\helpdesk\model\registerandlogin\Address.class
+com\bcj\helpdesk\model\registerandlogin\Login.class
+com\bcj\helpdesk\service\registerandlogin\RegistrationAndLoginService.class
+com\bcj\helpdesk\service\tickets\TicketsService.class
+com\bcj\helpdesk\model\registerandlogin\UserType.class
+com\bcj\helpdesk\model\registerandlogin\UsStates.class
+com\bcj\helpdesk\service\ticketsmanagment\TicketsManagementService.class
+com\bcj\helpdesk\controller\ticketsmanagement\TicketsManagementController.class
+com\bcj\helpdesk\dao\registerandlogin\UserDaoImpl.class
+com\bcj\helpdesk\controller\tickets\TicketsController.class
+com\bcj\helpdesk\controller\registrationandlogin\HomeController.class
+com\bcj\helpdesk\model\registerandlogin\User.class
+com\bcj\helpdesk\dao\registerandlogin\UserDao.class
+com\bcj\helpdesk\dao\tickets\TicketsDao.class
+com\bcj\helpdesk\model\tickets\Tickets.class

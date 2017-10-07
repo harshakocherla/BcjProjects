@@ -1,0 +1,43 @@
+package com.bcj.helpdesk.service.tickets;
+
+import org.junit.*;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class TicketsServiceTest {
+
+	@Mock
+	private TicketsService ticketsService;
+	
+	@Before
+	public void initMocks(){
+		MockitoAnnotations.initMocks(this);
+	}
+	
+	
+	@Test
+
+	public void retrieveCategoryTest(){
+		List<String> category = new ArrayList<String>();
+		
+		category.add("Employment");
+		category.add("Recruting");
+		category.add("OfficeSupplies");
+		category.add("Training");
+		when(ticketsService.retrieveCategory()).thenReturn(category);
+		
+		List<String> testCategory = new ArrayList<String>();
+		
+		testCategory.add("Employment");
+		testCategory.add("Recruting");
+		testCategory.add("OfficeSupplies");
+		testCategory.add("Training");
+		Assert.assertEquals(testCategory, ticketsService.retrieveCategory());
+	}
+}

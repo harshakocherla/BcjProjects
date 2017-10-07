@@ -1,0 +1,170 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>BCJ-HelpDesk</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="icon"
+	href="<c:url value="/resources/theme1/css/icon3.png" />" type="image">
+<link href="<c:url value="/resources/theme1/css/BCJhelpDesk.css" />" rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+.affix {
+	top: 0;
+	width: 100%;
+}
+
+.affix+.container-fluid {
+	padding-top: 70px;
+}
+p{
+color: grey;
+}
+</style>
+
+<!-- 	<script>
+	document.getElementById("Profile").innerHTML = "welcome" + ${message};
+	</script> -->
+
+
+</head>
+
+<body class="bg4">
+	<div class="container-fluid row">
+		<div class="col-sm-4">
+			<img src="<c:url value="/resources/theme1/css/icon11.png"/>"
+				alt="icon11.png" height="140px" />
+		</div>
+		<div class="col-sm-4">
+				<h1 align= "center">Welcome to Boot Camp Java</h1>
+				<h3 align= "center">How can we help you today?</h3>
+		</div>
+	</div>
+
+	<nav class="navbar navbar-inverse" data-spy="affix"
+		data-offset-top="197" style="background: linear-gradient(to top left, #0000ff 0%, #0099ff 100%)">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand " href="#"><b>BCJ-HelpDesk</b></a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li data-toggle="tab" data-target="#myHome"><a href="#home">Home</a></li>
+				<!-- <li data-toggle="tab" data-target="#CreateTickets"><a -->
+				<li><a href="displayCreateTickets">Create Tickets</a></li>
+				<!-- <li data-toggle="tab" data-target="#myTickets1"><a -->
+				<li><a href="studentTickets">My Tickets</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li data-toggle="tab" data-target="#myProfile"><a id="Profile"
+					href="#"><span class="glyphicon glyphicon-user"></span>
+						${message}</a></li>
+
+				<li><a href="logout"><span
+						class="glyphicon glyphicon glyphicon-off"></span> Logout</a></li>
+
+			</ul>
+		</div>
+	</nav>
+
+	<div class="tab-content">
+		<div id="myHome" class="container tab-pane fade in active"
+			align="center" style="color: #000000;">
+			<!-- style='background-image: url("icon1.jpg")'-->
+			<h2>
+				<b>BCJ Help Desk</b>
+			</h2>
+			<p>
+				<small>Learn about issues, file a complaint or check your
+					complaint status.</small>
+			</p>
+			<p style="color:red">
+				${error_message}
+			</p>
+		</div>
+		<div id="CreateTickets" class="container tab-pane fade" align="center"
+			style="color: #000000;">
+			<div class="container jumbotron">
+				<form action="createTicket" method=POST>
+					<!-- style='background-image: url("icon1.jpg")'-->
+					<h2>
+						<b>BCJ Help Desk</b>
+					</h2>
+					<p>
+						<small>welcome to Tickets</small>
+					</p>
+					<div class="form-group">
+						<label for="ticketId">Ticket ID:</label> <input type="text"
+							class="form-control" placeholder="TicketID">
+					</div>
+					<div class="form-group">
+						<label for="category">Category: </label>
+						<div>
+							<select id="category" class="form-control" name="category">
+								<c:forEach var="item" items="${category}">
+									<option value="${item}">${item}</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="subcategory">Sub-category: </label>
+						<div>
+							<select id="category" class="form-control" name="subcategory">
+								<c:forEach var="item" items="${subcategory}">
+									<option value="${item}">${item}</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="issue/description">Issue/Description: (enter
+							upto 255 characters)</label><br>
+						<textarea maxlength="255" name="description" id="description"></textarea>
+					</div>
+
+					<div>
+						<button class="btn btn-info active" type="submit">submit</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+		<div id="myProfile" class="container tab-pane fade" align="center">
+			<!-- style='background-image: url("icon1.jpg")'-->
+			<h2>
+				<b>Welcome</b>
+			</h2>
+			<p>
+				<small>Profile details</small>
+			</p>
+
+		</div>
+		<div id="myTickets1" class="container tab-pane fade" align="center">
+			<!-- style='background-image: url("icon1.jpg")'-->
+			<h2>
+				<b>Welcome</b>
+			</h2>
+			<p>
+				<small>JQgrid here</small>
+			</p>
+			<!-- <div class="container" align="center">
+				<table id="jqGrid">
+				</table>
+				<div id="jqGridPager"></div>
+			</div> -->
+		</div>
+	</div>
+
+
+</body>
+
+</html>

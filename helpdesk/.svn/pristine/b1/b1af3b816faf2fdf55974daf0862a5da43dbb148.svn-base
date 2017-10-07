@@ -1,0 +1,3 @@
+com\bcj\helpdesk\service\tickets\TicketsServiceTest.class
+com\bcj\helpdesk\service\ticketsmanagment\TicketsManagementServiceTest.class
+com\bcj\helpdesk\service\registerandlogin\RegistrationAndLoginServiceTest.class

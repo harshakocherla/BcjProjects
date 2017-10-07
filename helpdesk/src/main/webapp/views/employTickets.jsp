@@ -1,0 +1,680 @@
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="UTF-8" isELIgnored="false"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>BCJ-helpdesk</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="icon" href="<c:url value="/resources/theme1/css/icon3.png" />" type="image">
+<link href="<c:url value="/resources/theme1/css/BCJhelpDesk.css" />" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- let's add tag srping:url -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.14.0/css/ui.jqgrid.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.14.0/jquery.jqgrid.min.js"></script>
+
+<style type ="text/css">
+h1, h3, h4 {
+	color: white;
+	text-shadow: 3px 2px gray;
+	font-family: FreeMono, monospace;
+}
+
+h2{
+	color: gray;
+	text-shadow: 4px 2px white;
+	font-family: "Helvetic Neue", Helvetica, Arial, sans-serif;   
+}
+</style>
+</head>
+
+
+<body class="bg3">
+	<div class="container-fluid row">
+		<div class="col-sm-4">
+			<img src="<c:url value="/resources/theme1/css/icon11.png" />"
+				alt="icon11.png" height="140px" />
+		</div>
+		<div class="col-sm-4">
+				<h1 align = "center">Boot Camp Java</h1>
+				<h3 align = "center">How can we help you today?</h3>
+		</div>
+	</div>
+	<nav class="navbar navbar-inverse" data-spy="affix"
+		data-offset-top="197" style="background: linear-gradient(to bottom, #080808 45%, #989898 99%);">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand " href="#"><b>BCJ-HelpDesk</b></a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="returntologin">Home</a></li>
+				<li data-toggle="tab" data-target="#contact"><a href="#"><span
+						class="glyphicon glyphicon-phone-alt"></span>Contact</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li data-toggle="tab" data-target="#myProfile"><a id="Profile"
+					href="#"><span class="glyphicon glyphicon-user"></span>
+						My Profile</a></li>
+
+				<li><a href="logout"><span
+						class="glyphicon glyphicon glyphicon-off"></span> Logout</a></li>
+
+			</ul>
+		</div>
+	</nav>
+	<div class="tab-content">
+	<div id="contact" class="container jumbotron tab-pane fade"
+			align="center" style="background: rgba(153, 235, 255, 0.5)">
+			<h3>Contact Details</h3><hr>
+			<p>
+			<pre>
+				Ektha Solution is very much responsive to queries and questions through email. 
+				Please send us your business inquiries through the contact form or send an email or mail on the address below. 
+				We are open to phone calls on business days during business hours.
+			</pre>
+			</p><hr>
+			<p>
+			<pre>
+			<b>
+			Office: USA
+			</b>
+			<b>
+			Address:</b>
+			3050 Regent BLVD, STE 150 Irving, TX 75063
+			<b>
+			Email:</b>
+			info@ekthasol.com
+			<b>
+			Phone:</b>
+			+1 214 550 0232
+			</pre>
+			</p>
+		</div>
+		</div>
+<div class= "container" align = "center">
+	<form>
+
+		<div class="container" align="center">
+			<h4>Pending Ticket Details Table</h4>
+		</div>
+
+		<div>
+			<table id="pendingemployeelist">
+				<tr>
+					<td />
+				</tr>
+			</table>
+			<div id="pager"></div>
+
+		</div>
+		<div class="container" align="center">
+			<h4>Approved Ticket Details Table</h4>
+		</div>
+
+		<div>
+			<table id="approvedemployeelist">
+				<tr>
+					<td />
+				</tr>
+			</table>
+			<div id="pager1"></div>
+		</div>
+
+		<div class="container" align="center">
+			<h4>Rejected Ticket Details Table</h4>
+		</div>
+
+		<div>
+			<table id="rejectedemployeelist">
+				<tr>
+					<td />
+				</tr>
+			</table>
+			<div id="pager2"></div>
+		</div>
+
+
+	</form>
+</div>
+	<script type='text/javascript'>
+    
+	$(document).ready(function(){
+		 
+	  $("#pendingemployeelist").jqGrid({
+
+	                url : "pendingTickets",
+
+	                datatype : "json",
+
+	                mtype : 'POST',
+
+	                colNames : [ 'Id', 'category', 'subcategory', 'description', 'status' , 'comments', 'user_details','username','Ticket Number'],
+
+	                colModel : [ {
+
+	                        name : 'ticketId',
+
+	                        index : 'ticketId',
+
+	                        width : 75
+
+	                }, {
+
+	                        name : 'category',
+
+	                        index : 'category',
+
+	                        width : 150,
+
+	                        editable : false
+
+	                }, {
+
+	                        name : 'subcategory',
+
+	                        index : 'subcategory',
+
+	                        width : 150,
+
+	                        editable : false
+
+	                },
+	                	{
+	                	
+	                	name : 'description',
+
+	                      index : 'description',
+
+	                      width : 150,
+
+	                      editable : false
+	                	
+                        
+                	},
+	                  {
+	                	  
+                		name : 'stat',
+
+                        index : 'stat',
+
+                        width : 150,
+
+                        editable : false
+ 
+	                	  
+	                  },
+	                
+	                {
+	                	 name : 'comments',
+
+	                     index : 'comments',
+
+	                     width : 250,
+
+	                     editable : false
+	                	
+	                },
+	                {
+	                	 name : 'login_loginId',
+
+	                     index : 'login_loginId',
+
+	                     width : 75,
+
+	                     editable : false
+	                	
+	                },
+	                {
+	                	 name : 'username',
+
+	                     index : 'username',
+
+	                     width : 150,
+
+	                     editable : false
+	                	
+	                },
+	                {
+	                	 name : 'ticketNumber',
+
+	                     index : 'ticketNumber',
+
+	                     width : 150,
+
+	                     editable : false
+	                	
+	                }
+	                ],
+
+	                pager : '#pager',
+
+	                rowNum : 10,
+
+	                height: 'auto',
+
+	                rowList : [ 10, 20 ],
+
+	                sortname : 'invid',
+
+	                sortorder : 'desc',
+
+	                viewrecords : true,
+
+	                gridview : true,
+
+	                multiselect: true,
+
+	                multiboxonly: false,
+	                //loadonce : true,
+
+	                caption : 'Pending Ticket Details',
+
+	                jsonReader : {
+
+	                        repeatitems : false,
+
+	                }
+
+	        });
+	  
+	  
+	  jQuery("#pendingemployeelist").jqGrid('navGrid', '#pager', {
+
+          edit : false,
+
+          add : false,
+
+          del : false,
+
+          search : false
+
+  });
+	   jQuery("#pendingemployeelist")
+	  .navGrid('#pager',{edit:false,add:false,del:false,search:false})
+	  .navButtonAdd('#pager',{
+	     caption:"Approve",
+	     cursor: "pointer",
+	     buttonicon:"ui-icon-check", 
+	     onClickButton: function(){ 
+	    	 var selRowArr = jQuery("#pendingemployeelist").getGridParam('selrow');
+				var comments = prompt("Please pass comments");
+				var celValue = $('#pendingemployeelist').jqGrid('getCell',selRowArr,'ticketId');
+						var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200){
+			    	jQuery("#pendingemployeelist").trigger("reloadGrid");
+			    	jQuery("#approvedemployeelist").trigger("reloadGrid");
+			    	}
+			    };
+			    xhttp.open("POST", "approve?val="+celValue+"&comments="+comments,true);
+			    xhttp.send();
+	    	
+	        /* alert("Adding Row"); */ 
+	       
+	     }, 
+	     position:"last"
+	  })
+	   .navButtonAdd('#pager',{
+	     caption:"Reject", 
+	     cursor: "pointer",
+	     buttonicon:"ui-icon-closethick", 
+	     onClickButton: function(){ 
+	    	 var selRowArr = jQuery("#pendingemployeelist").getGridParam('selrow');
+				var comments = prompt("Please pass Comments");
+				var celValue = $('#pendingemployeelist').jqGrid('getCell',selRowArr,'ticketId');
+						var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+			  			    if (this.readyState == 4 && this.status == 200){
+			  			    	jQuery("#pendingemployeelist").trigger("reloadGrid");
+			  			    	jQuery("#approvedemployeelist").trigger("reloadGrid");
+			  			    	}
+			  			    };
+			  	xhttp.open("POST", "reject?val="+celValue+"&comments="+comments,true);
+			  	xhttp.send();
+	       /*  alert("Deleting Row"); */
+	     }, 
+	     position:"last"
+	  });  
+	   
+	 });  
+
+	  </script>
+
+	<!-- Approved -->
+
+	<script type='text/javascript'>
+    
+	  $(document).ready(function(){
+		 
+	  $("#approvedemployeelist").jqGrid({
+
+	                url : "approvedTickets",
+
+	                datatype : "json",
+
+	                mtype : 'POST',
+
+	                colNames : [ 'Id', 'category', 'subcategory', 'description', 'status' , 'comments', 'user_details','username','Ticket Number'],
+
+	                colModel : [ {
+
+                        name : 'ticketId',
+
+                        index : 'ticketId',
+
+                        width : 75
+
+                }, {
+
+                        name : 'category',
+
+                        index : 'category',
+
+                        width : 150,
+
+                        editable : false
+
+                }, {
+
+                        name : 'subcategory',
+
+                        index : 'subcategory',
+
+                        width : 150,
+
+                        editable : false
+
+                },
+                	{
+                	
+                	name : 'description',
+
+                      index : 'description',
+
+                      width : 150,
+
+                      editable : false
+                	
+                    
+            	},
+                  {
+                	  
+            		name : 'stat',
+
+                    index : 'stat',
+
+                    width : 150,
+
+                    editable : false
+
+                	  
+                  },
+                
+                {
+                	 name : 'comments',
+
+                     index : 'comments',
+
+                     width : 250,
+
+                     editable : false
+                	
+                },
+                {
+                	 name : 'login_loginId',
+
+                     index : 'login_loginId',
+
+                     width : 75,
+
+                     editable : false
+                	
+                },
+                {
+               	 name : 'username',
+
+                 index : 'username',
+
+                 width : 150,
+
+                 editable : false
+            	
+            },
+            {
+            	 name : 'ticketNumber',
+
+                 index : 'ticketNumber',
+
+                 width : 150,
+
+                 editable : false
+            	
+            }
+            ],
+
+	                pager : '#pager1',
+	                
+
+	                rowNum : 10,
+
+	                height: 'auto',
+
+	                rowList : [ 10, 20, 30 ],
+
+	                sortname : 'invid',
+
+	                sortorder : 'desc',
+
+	                viewrecords : true,
+
+	                gridview : true,
+
+	                multiselect: true,
+
+	                multiboxonly: false,
+
+	                caption : 'Approved Ticket Details',
+
+	                jsonReader : {
+
+	                        repeatitems : false,
+
+	                }
+
+	        });
+	  
+	  
+	  jQuery("#approvedemployeelist").jqGrid('navGrid', '#pager1', {
+
+          edit : false,
+
+          add : false,
+
+          del : false,
+
+          search : false
+
+  });
+
+
+	 }); 
+
+	  </script>
+
+
+	<!-- Rejected -->
+
+	<script type='text/javascript'>
+    
+  $(document).ready(function(){
+		 
+	  $("#rejectedemployeelist").jqGrid({
+
+	                url : "rejectedTickets",
+
+	                datatype : "json",
+
+	                mtype : 'POST',
+
+	                colNames : [ 'Id', 'category', 'subcategory', 'description', 'status' , 'comments', 'user_details','username','Ticket Number'],
+
+	                colModel : [ {
+
+                        name : 'ticketId',
+
+                        index : 'ticketId',
+
+                        width : 75
+
+                }, {
+
+                        name : 'category',
+
+                        index : 'category',
+
+                        width : 150,
+
+                        editable : false
+
+                }, {
+
+                        name : 'subcategory',
+
+                        index : 'subcategory',
+
+                        width : 150,
+
+                        editable : false
+
+                },
+                	{
+                	
+                	name : 'description',
+
+                      index : 'description',
+
+                      width : 150,
+
+                      editable : false
+                	
+                    
+            	},
+                  {
+                	  
+            		name : 'stat',
+
+                    index : 'stat',
+
+                    width : 150,
+
+                    editable : false
+
+                	  
+                  },
+                
+                {
+                	 name : 'comments',
+
+                     index : 'comments',
+
+                     width : 250,
+
+                     editable : false
+                	
+                },
+                {
+                	 name : 'login_loginId',
+
+                     index : 'login_loginId',
+
+                     width : 75,
+
+                     editable : false
+                	
+                },
+                {
+               	 name : 'username',
+
+                 index : 'username',
+
+                 width : 150,
+
+                 editable : false
+            	
+            },
+            {
+            	 name : 'ticketNumber',
+
+                 index : 'ticketNumber',
+
+                 width : 150,
+
+                 editable : false
+            	
+            }
+            ],
+
+
+	                pager : '#pager2',
+
+	                rowNum : 10,
+
+	                height: 'auto',
+
+	                rowList : [ 10, 20, 30 ],
+
+	                sortname : 'invid',
+
+	                sortorder : 'desc',
+
+	                viewrecords : true,
+
+	                gridview : true,
+
+	                multiselect: true,
+
+	                multiboxonly: false,
+
+	                caption : 'Rejected Ticket Details',
+
+	                jsonReader : {
+
+	                        repeatitems : false,
+
+	                }
+
+	        });
+	  
+	  
+	  jQuery("#rejectedemployeelist").jqGrid('navGrid', '#pager2', {
+
+          edit : false,
+
+          add : false,
+
+          del : false,
+
+          search : false
+
+  });
+
+
+	 }); 
+
+	  </script>
+
+	
+	
+
+</body>
+</html>

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.bcj.helpdesk.model.tickets.Tickets;
 
+
+
 /**
  * @author Harsha Kocherla
  * 
@@ -119,7 +121,7 @@ public class TicketsDao {
 		String query1 = "select helpdesk_categoriesId from helpdesk_categories where categories=?";
 		int categoryId = jdbcTemplate.queryForObject(query1, new Object[] { category }, Integer.class);
 
-		String query = "select subcategories from helpdesk_subcategories where categoryId=?";
+		String query = "select subcategories from helpdesk_subcategories where helpdesk_categoriesId=?";
 
 		List<Map<String, Object>> subcategoryDb = jdbcTemplate.queryForList(query, new Object[] { categoryId });
 
